@@ -5,7 +5,13 @@
   "repository": "https://github.com/ElianDeveloper/Buisness.git",
   "author": "ElianDeveloper <marincabreraeliandaniel@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }
