@@ -1,0 +1,11 @@
+{
+  "name": "Buisness",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ElianDeveloper/Buisness.git",
+  "author": "ElianDeveloper <marincabreraeliandaniel@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
