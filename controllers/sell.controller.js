@@ -31,7 +31,26 @@ const getByIdSell = async (req, res) => {
   }
 };
 
+//creating a Sell
+const createSell = async (req, res) => {
+  const { date, amount, category, product_id } = req.body;
+
+  try {
+    const newSell = await Sell.create({
+      date,
+      amount,
+      category,
+      product_id,
+    });
+
+    res.json(newSell);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getSells,
   getByIdSell,
+  createSell,
 };
