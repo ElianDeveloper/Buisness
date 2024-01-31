@@ -31,7 +31,26 @@ const getByIdExpense = async (req, res) => {
   }
 };
 
+//creating a Expense
+const createExpense = async (req, res) => {
+  const { date, amount, category, product_id } = req.body;
+
+  try {
+    const newExpense = await Expense.create({
+      date,
+      amount,
+      category,
+      product_id,
+    });
+
+    res.json(newExpense);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getExpenses,
   getByIdExpense,
+  createExpense,
 };

@@ -20,7 +20,7 @@ const Sell = sequelize.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
     tableName: "sell",
   }
 );
