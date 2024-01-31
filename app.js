@@ -18,7 +18,7 @@ app.use('/api', productRoutes);
 
 async function main() {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     app.listen(port, () => {
       console.log(`The application is listening at http://localhost:${port}`);
     });
