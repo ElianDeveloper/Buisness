@@ -1,7 +1,9 @@
 const express = require("express");
-const sequelize = require("./database/database.js");
 const app = express();
 const port = 3000;
+
+const sequelize = require("./database/database.js");
+const productRoutes = require('./routes/product.route.js');
 
 //Import modules
 require("./models/Product.js");
@@ -10,6 +12,9 @@ require("./models/Sell.js");
 
 //Middleware
 app.use(express.json());
+
+// Routes
+app.use('/api', productRoutes);
 
 async function main() {
   try {
