@@ -49,8 +49,29 @@ const createSell = async (req, res) => {
   }
 };
 
+//updating sell
+const updateSell = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { date, amount, category, product_id } = req.body;
+
+    const sell = await Sell.findByPk(id);
+    sell.date = date;
+    sell.amount = amount;
+    sell.category = category;
+    sell.product_id = product_id;
+
+    await sell.save();
+
+    res.json(sell);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getSells,
   getByIdSell,
   createSell,
+  updateSell,
 };
