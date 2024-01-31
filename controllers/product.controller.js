@@ -1,25 +1,25 @@
+const Product = require("../models/Product.js");
 
 //get all products
-export const getProducts = async (req, res) => {
- 
+const getProducts = async (req, res) => {
+  try {
+    const products = await Product.findAll();
+    res.json(products);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 //get product by id
-export const getByIdProduct = async (req, res) => {
- 
-};
+const getByIdProduct = async (req, res) => {};
 
 //creating a product
-export const createProduct = async (req, res) => {
-  
-};
+const createProduct = async (req, res) => {};
 
 //updating product
-export const updateProduct = async (req, res) => {
- 
-};
+const updateProduct = async (req, res) => {};
 
 //delete product
-export const deleteProduct = async (req, res) => {
-  
-};
+const deleteProduct = async (req, res) => {};
+
+module.exports = { getProducts };
