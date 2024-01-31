@@ -70,11 +70,25 @@ const updateProduct = async (req, res) => {
 };
 
 //delete product
-const deleteProduct = async (req, res) => {};
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Product.destroy({
+      where: {
+        id,
+      },
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
   getProducts,
   getByIdProduct,
   createProduct,
   updateProduct,
+  deleteProduct,
 };
