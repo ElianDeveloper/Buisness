@@ -3,7 +3,8 @@ const app = express();
 const port = 3000;
 
 const sequelize = require("./database/database.js");
-const productRoutes = require('./routes/product.route.js');
+const productRoutes = require("./routes/product.route.js");
+const expenseRoutes = require("./routes/expense.route.js");
 
 //Import modules
 require("./models/Product.js");
@@ -14,7 +15,8 @@ require("./models/Sell.js");
 app.use(express.json());
 
 // Routes
-app.use('/api', productRoutes);
+app.use("/api", productRoutes);
+app.use("/api", expenseRoutes);
 
 async function main() {
   try {
