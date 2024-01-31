@@ -50,9 +50,31 @@ const createProduct = async (req, res) => {
 };
 
 //updating product
-const updateProduct = async (req, res) => {};
+const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, price, amount } = req.body;
+
+    const product = await Product.findByPk(id);
+    product.name = name;
+    product.description = description;
+    product.price = price;
+    product.amount = amount;
+
+    await product.save();
+
+    res.json(product);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 //delete product
 const deleteProduct = async (req, res) => {};
 
-module.exports = { getProducts, getByIdProduct, createProduct };
+module.exports = {
+  getProducts,
+  getByIdProduct,
+  createProduct,
+  updateProduct,
+};
