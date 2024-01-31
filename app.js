@@ -1,6 +1,12 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const cors = require("cors");
+
+//import dotenv
+require("dotenv").config();
+
+//variable .env
+const port = process.env.PORT;
 
 const sequelize = require("./database/database.js");
 
@@ -16,6 +22,7 @@ require("./models/Sell.js");
 
 //Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api", productRoutes);
