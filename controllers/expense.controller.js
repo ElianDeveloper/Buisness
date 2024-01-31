@@ -49,8 +49,29 @@ const createExpense = async (req, res) => {
   }
 };
 
+//updating expense
+const updateExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { date, amount, category, product_id } = req.body;
+
+    const expense = await Expense.findByPk(id);
+    expense.date = date;
+    expense.amount = amount;
+    expense.category = category;
+    expense.product_id = product_id;
+
+    await expense.save();
+
+    res.json(expense);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getExpenses,
   getByIdExpense,
   createExpense,
+  updateExpense,
 };
