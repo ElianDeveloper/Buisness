@@ -69,9 +69,26 @@ const updateExpense = async (req, res) => {
   }
 };
 
+//delete Expense
+const deleteExpense = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Expense.destroy({
+      where: {
+        id,
+      },
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getExpenses,
   getByIdExpense,
   createExpense,
   updateExpense,
+  deleteExpense,
 };
