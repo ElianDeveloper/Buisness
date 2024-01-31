@@ -69,9 +69,26 @@ const updateSell = async (req, res) => {
   }
 };
 
+//delete Sell
+const deleteSell = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await Sell.destroy({
+      where: {
+        id,
+      },
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getSells,
   getByIdSell,
   createSell,
   updateSell,
+  deleteSell,
 };
