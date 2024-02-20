@@ -28,7 +28,27 @@ require("./models/Product.js");
 require("./models/Expense.js");
 require("./models/Sell.js");
 
+//Configuracion del logger
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.File({ filename: "registro.log" }),
+    new winston.transports.Console({ format: winston.format.simple() }),
+  ],
+});
+
+logger.info("Registro de informacion");
+logger.warn("Advertencia: algo podria estar mal");
+logger.error("Error: algo salio mal");
+
 //Middleware
+function errorHandler(err, req, res, next) {
+  logger.error(err.stack);
+  res.status(500).send("¡Algo salio mal!");
+}
+
+//Add Middleware
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(
@@ -37,15 +57,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
-const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.json(),
-  transports: [new winston.transports.File({ filename: "registro.log" })],
-});
-
-logger.info("Registro de informacion");
-logger.warn("Advertencia: algo podria estar mal");
-logger.error("Error: algo salio mal");
+app.use(errorHandler);
 
 // Routes
 app.use("/api", productRoutes);
