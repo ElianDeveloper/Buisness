@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
+const winston = require("winston");
 
 //import dotenv
 const dotenv = require("dotenv").config();
@@ -36,6 +37,15 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.json(),
+  transports: [new winston.transports.File({ filename: "registro.log" })],
+});
+
+logger.info("Registro de informacion");
+logger.warn("Advertencia: algo podria estar mal");
+logger.error("Error: algo salio mal");
 
 // Routes
 app.use("/api", productRoutes);
