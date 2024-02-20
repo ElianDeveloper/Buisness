@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const morgan = require("morgan");
 
 //import dotenv
 const dotenv = require("dotenv").config();
@@ -28,6 +29,7 @@ require("./models/Sell.js");
 
 //Middleware
 app.use(express.json());
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: "*",
