@@ -3,11 +3,17 @@ const app = express();
 const cors = require("cors");
 
 //import dotenv
-require("dotenv").config();
+const dotenv = require("dotenv").config();
+
+//check enviroment
+if (dotenv.error) {
+  throw new Error(`Enviroment Variables - import error | ${dotenv.error}`);
+}
 
 //variable .env
 const port = process.env.PORT;
 
+//import sequilize
 const sequelize = require("./database/database.js");
 
 //Imports Routes
@@ -22,7 +28,12 @@ require("./models/Sell.js");
 
 //Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 // Routes
 app.use("/api", productRoutes);
