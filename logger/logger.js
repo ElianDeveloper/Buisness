@@ -10,8 +10,5 @@ const logger = winston.createLogger({
   ],
 });
 
-logger.info("Registro de informacion");
-logger.warn("Advertencia: algo podria estar mal");
-logger.error("Error: algo salio mal");
 
 module.exports = logger;
