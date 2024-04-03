@@ -21,14 +21,17 @@ const sequelize = require("./database/database.js");
 const productRoutes = require("./routes/product.route.js");
 const expenseRoutes = require("./routes/expense.route.js");
 const sellRoutes = require("./routes/sell.route.js");
+const usersRoutes = require("./routes/users.route.js");
 
 //Imports modules
 require("./models/Product.js");
 require("./models/Expense.js");
 require("./models/Sell.js");
+require("./models/Users.js");
 
 //Middleware
 const errorHandler = require("./middleware/errorHandler.js");
+const authenticate = require("./middleware/authenticate.js");
 
 //Add Middleware
 app.use(express.json());
@@ -40,8 +43,10 @@ app.use(
   })
 );
 app.use(errorHandler);
+// app.use(authenticate);
 
 // Routes
+app.use("/api", usersRoutes);
 app.use("/api", productRoutes);
 app.use("/api", expenseRoutes);
 app.use("/api", sellRoutes);
