@@ -1,9 +1,14 @@
-const logger = require("../logger/logger");
+const logger = require("../logger/logger")
 
-//Middleware
-function errorHandler(err, req, res, next) {
-  logger.error(err.stack);
-  res.status(500).send("¡Algo salio mal!");
+const errorHandler = (err, req, res, next) => {
+    err.StatusCode = err.StatusCode || 500;
+    err.status = err.status || 'error';
+
+    logger.error(`ERROR ${err.StatusCode} - ${req.method}${req.path} - ${err.status} - ${err.message}`);
+
+    res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message
+    });
 }
-
 module.exports = errorHandler;
